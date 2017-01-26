@@ -1,0 +1,21 @@
+<% include _header %>
+
+  <% board.lists.forEach((list) => { %>
+
+    <div class="jumbotron">
+      <form method="post" action="/boards/delete/<%= board._id %>/<%= list._id %>">
+        <button type="submit" class="btn btn-danger pull-right">Delete this list</button>
+      </form>
+      <a href="/boards/delete/<%= board._id %>/<%= list._id %>">Delete this list</a>
+      <ul>
+        <% list.todos.forEach((todo) => { %>
+          <li>
+            <%= todo %>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
+  <% }); %>
+
+
+<% include _footer %>

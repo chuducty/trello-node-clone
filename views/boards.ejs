@@ -1,0 +1,9 @@
+<% include _header %>
+ <% boards.forEach((board) => { %>
+   <div>
+    <a href="/boards/board/<%= board._id %>"><%= board.name %></a>
+   </div>
+
+
+ <% }) %>
+<% include _footer %>
