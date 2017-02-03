@@ -3,12 +3,7 @@ var passport = require("passport");
 var router = express.Router();
 var User = require("./../models/user");
 
-router.use(function(req, res, next) {
-  res.locals.currentUser = req.user;
-  res.locals.errors = req.flash("error");
-  res.locals.infos = req.flash("info");
-  next();
-});
+
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     next();
@@ -67,13 +62,13 @@ router.get("/login", function(req, res) {
   res.render("login");
 });
 router.post("/login", passport.authenticate("login", {
-  successRedirect: "/",
+  successRedirect: "/boards",
   failureRedirect: "/login",
   failureFlash: true
 }));
 router.get("/logout", function(req, res) {
   req.logout();
-  res.redirect("/");
+  res.redirect("/login");
 });
 
 router.get('/edit', ensureAuthenticated, (req, res) => {

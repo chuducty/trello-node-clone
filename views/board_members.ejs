@@ -1,0 +1,24 @@
+<% include _header %>
+
+<h1>Creator: <i><%= creator.username %></i></h1>
+<h1>Members: </h1>
+<% if (members) { %>
+
+  <% members.forEach((member) => { %>
+    <div class="jumbotron">
+      <%= member.username %>
+      <form method="post" action="/boards/board/<%= board._id %>/members/delete">
+        <input type="hidden" name="board_id" value="<%= board._id %>" />
+        <input type="hidden" name="member_id" value="<%= member._id %>" >
+        <button type="submit" class="btn btn-danger pull-right">Delete member</button>
+
+      </form>
+
+
+    </div>
+
+  <% }) %>
+<% } %>
+
+
+<% include _footer %>

@@ -40,7 +40,13 @@ app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(function(req, res, next) {
+  //console.log('ahihi');
+  res.locals.currentUser = req.user;
+  res.locals.errors = req.flash("error");
+  res.locals.infos = req.flash("info");
+  next();
+});
 app.use('/', index);
 app.use('/boards', boards)
 

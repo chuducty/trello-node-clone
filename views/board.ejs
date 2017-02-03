@@ -1,19 +1,88 @@
 <% include _header %>
+  <div class="pull-right">
+    <a href="/boards/board/<%= board._id %>/members">List of members</a>
+  </div>
+  <form method="post" action="/boards/list/create">
+    <div class="row">
+      <div class="col-md-5">
+        <input type="hidden" name="board_id" id="board_id" class="form-control" value="<%= board._id %>" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5">
+        <input type="text" name="name" id="name" class="form-control" placeholder="Name of the new list" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5">
+        <button class="btn btn-sm btn-primary">New List</button>
+      </div>
+    </div>
+
+  </form>
+
+  <% if (isCreator) { %>
+    <form method="post" action="/boards/board/addMember">
+      <div class="row">
+        <div class="col-md-5">
+          <input type="hidden" name="board_id" id="board_id" class="form-control" value="<%= board._id %>" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <input type="text" name="name" id="name" class="form-control" placeholder="Name of the new user" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <button class="btn btn-sm btn-primary">Add Member</button>
+        </div>
+      </div>
+
+    </form>
+  <% } %>
 
   <% board.lists.forEach((list) => { %>
 
     <div class="jumbotron">
-      <form method="post" action="/boards/delete/<%= board._id %>/<%= list._id %>">
-        <button type="submit" class="btn btn-danger pull-right">Delete this list</button>
+      <form method="post" action="/boards/list/delete">
+        <input type="hidden" name="board_id" value="<%= board._id %>" />
+        <input type="hidden" name="list_id" value="<%= list._id %>" />
+        <button type="submit" class="btn btn-danger pull-right">Complete</button>
+
       </form>
-      <a href="/boards/delete/<%= board._id %>/<%= list._id %>">Delete this list</a>
-      <ul>
+      <form method="post" action="/boards/todo/create">
+        <input type="hidden" name="board_id" value="<%= board._id %>" />
+        <input type="hidden" name="list_id" value="<%= list._id %>" />
+        <div class="row">
+          <div class="col-md-5">
+            <input type="text" name="name" id="name" class="form-control" placeholder="Name of the new list" />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Item to list</button>
+
+      </form>
+      <h3><%= list.name %></h3>
+
+      <!-- <a href="/boards/delete/<%= board._id %>/<%= list._id %>">Delete this list</a> -->
+
         <% list.todos.forEach((todo) => { %>
-          <li>
-            <%= todo %>
-          </li>
+          <div>
+            <!-- <%= todo.describe %> -->
+            <form method="post" action="/boards/todo/delete">
+              <input type="hidden" name="board_id" value="<%= board._id %>" />
+              <input type="hidden" name="list_id" value="<%= list._id %>" />
+              <input type="hidden" name="todo_id" value="<%= todo._id %>" />
+              <p class="col-md-offset-1">
+                <%= todo.describe %>
+                <button type="submit" class="btn btn-xs  btn-danger">Done</button>
+
+              </p>
+
+            </form>
+          </div>
         <% }); %>
-      </ul>
+
     </div>
   <% }); %>
 

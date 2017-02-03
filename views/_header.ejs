@@ -9,7 +9,7 @@
 <div class="navbar navbar-default navbar-static-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">Learn About Me</a>
+      <a class="navbar-brand" href="/boards">Learn About Me</a>
 </div>
     <ul class="nav navbar-nav navbar-right">
       <% if (currentUser) { %>
@@ -26,11 +26,12 @@
 </ul> </div>
 </div>
 <div class="container">
+  
   <% errors.forEach(function(error) { %>
     <div class="alert alert-danger" role="alert">
       <%= error %>
     </div>
-<% }) %>
+    <% }) %>
   <% infos.forEach(function(info) { %>
     <div class="alert alert-info" role="alert">
       <%= info %>

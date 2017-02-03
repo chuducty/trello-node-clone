@@ -1,9 +1,24 @@
 <% include _header %>
- <% boards.forEach((board) => { %>
-   <div>
-    <a href="/boards/board/<%= board._id %>"><%= board.name %></a>
-   </div>
+  <form method="post" action="/boards/board/create">
+    <div class="row">
+      <div class="col-md-5">
+        <input type="text" name="name" id="name" class="form-control" placeholder="Name of the new board" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5">
+        <button class="btn btn-sm btn-primary">New Board</button>
+      </div>
+    </div>
 
+  </form>
+  <hr />
+  <div style="margin-top:20px;">
+    <% boards.forEach((board) => { %>
+      <div>
+        <h1><a href="/boards/board/<%= board._id %>"><%= board.name %></a></h1>
+      </div>
+    <% }) %>
+  </div>
 
- <% }) %>
 <% include _footer %>
