@@ -47,7 +47,7 @@ app.use(function(req, res, next) {
   res.locals.infos = req.flash("info");
   next();
 });
-app.use('/', index);
+app.use('/', index)
 app.use('/boards', boards)
 
 app.listen(port, () => {

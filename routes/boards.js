@@ -91,7 +91,8 @@ router.get('/board/:board_id/members', ensureAuthenticated, ensureMember, (req, 
       })
 
       return Promise.all(tmp).then((members) => {
-        res.render('board_members', {members: members , creator: user, board: board});
+        var isCreator = user._id.equals(req.user._id) ? true : false
+        res.render('board_members', {members: members , creator: user, board: board, isCreator});
       })
     });
   }).catch((e) => {

@@ -13,12 +13,7 @@ function ensureAuthenticated(req, res, next) {
   }
 }
 router.get('/', (req, res) => {
-  User.find()
-  .sort({ createdAt: "descending" })
-  .exec(function(err, users) {
-    if (err) { return next(err); }
-    res.render("index", { users: users });
-  });
+  res.redirect('/login');
 
 });
 
